@@ -6,7 +6,7 @@ export class Client extends PureComponent {
     this.myRef = React.createRef();
   }
   componentWillUnmount() {
-    alert("Операция выполнена успешно");
+    alert("Операция выполнена успешно delete");
   }
   componentDidUpdate() {
     alert("Операция выполнена успешно");
