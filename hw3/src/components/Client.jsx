@@ -5,12 +5,6 @@ export class Client extends PureComponent {
     super(props);
     this.myRef = React.createRef();
   }
-  componentWillUnmount() {
-    alert("Операция выполнена успешно delete");
-  }
-  componentDidUpdate() {
-    alert("Операция выполнена успешно");
-  }
   render() {
     return (
       <div style={{ display: "flex", gap: "10px" }}>

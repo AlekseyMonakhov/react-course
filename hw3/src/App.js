@@ -1,14 +1,23 @@
 import "./App.css";
 import React from "react";
-import Client from "./components/Client";
+import { Client } from "./components/Client";
+import Notification from "./components/Notification";
 
 class App extends React.Component {
-  state = { clients: [] };
+  state = {
+    clients: [],
+    showMessage: false,
+  };
+
   componentDidMount() {
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
       .then((clients) => this.setState({ clients: clients.slice(0, 10) }));
   }
+  toogleShowMessagge = () => {
+    this.setState({ showMessage: false });
+  };
+
   updateHandler = async (id, value) => {
     try {
       const result = await fetch(
@@ -28,11 +37,13 @@ class App extends React.Component {
           clients: this.state.clients.map((client) =>
             client.id === id ? { ...client, title: value } : client
           ),
+          showMessage: true,
         });
     } catch (err) {
       console.log(err);
     }
   };
+
   removeHandler = async (id) => {
     try {
       const result = await fetch(
@@ -44,6 +55,7 @@ class App extends React.Component {
       result.status === 200 &&
         this.setState({
           clients: this.state.clients.filter((client) => client.id !== id),
+          showMessage: true,
         });
     } catch (err) {
       console.log(err);
@@ -52,23 +64,28 @@ class App extends React.Component {
 
   render() {
     return (
-      <div
-        style={{
-          display: "flex",
-          flexFlow: "column nowrap",
-          padding: "15px",
-          gap: "10px",
-        }}
-      >
-        {this.state.clients.map((client) => (
-          <Client
-            client={client}
-            updateHandler={this.updateHandler}
-            removeHandler={this.removeHandler}
-            key={client.id}
-          />
-        ))}
-      </div>
+      <>
+        <div
+          style={{
+            display: "flex",
+            flexFlow: "column nowrap",
+            padding: "15px",
+            gap: "10px",
+          }}
+        >
+          {this.state.clients.map((client) => (
+            <Client
+              client={client}
+              updateHandler={this.updateHandler}
+              removeHandler={this.removeHandler}
+              key={client.id}
+            />
+          ))}
+          {this.state.showMessage && (
+            <Notification toogleShowMessagge={this.toogleShowMessagge} />
+          )}
+        </div>
+      </>
     );
   }
 }
