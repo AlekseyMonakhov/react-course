@@ -15,7 +15,7 @@ export class FormInput extends PureComponent {
         <input
           id={id}
           {...inputProps}
-          onFocus={this.handleFocus}
+          onBlur={this.handleFocus}
           focused={this.state.focused.toString()}
           onChange={onChange}
         />

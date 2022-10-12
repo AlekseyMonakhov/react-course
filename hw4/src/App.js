@@ -71,7 +71,7 @@ export class App extends Component {
               onChange={this.onChangeHandler}
             />
           ))}
-          <button>Submit</button>
+          <button>{Object.values(this.state).every((value) => value.length)  ? "Submit" : "Fill form"}</button>
         </form>
       </div>
     );
