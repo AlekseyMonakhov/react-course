@@ -48,7 +48,7 @@ export class App extends Component {
       type: "password",
       placeholder: "Password",
       errorMessage:
-        "Password should be 6-10 characters and include at least 1 capital letter, 1 number, 1 leter",
+        "Password should be 6-10 characters and include at least 1 capital letter, 1 number, 1 letter",
       label: "Password",
       pattern: `^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9!@#$%^&*]{6,10}$`,
       required: true,
