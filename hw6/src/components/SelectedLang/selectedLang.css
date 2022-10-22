@@ -1,0 +1,13 @@
+.lang-container {
+  display: flex;
+  width: 60%;
+  justify-content: space-around;
+  align-self: center;
+}
+.lang-container > li {
+  list-style-type: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}

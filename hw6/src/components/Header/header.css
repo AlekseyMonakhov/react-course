@@ -1,0 +1,43 @@
+nav {
+  display: flex;
+  gap: 20px;
+}
+.active {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+nav > a {
+  transition: all 0.5s ease;
+  font-size: 1rem;
+  font-weight: normal;
+  color: black;
+  text-decoration: none;
+}
+nav > a::after {
+  content: "";
+  display: block;
+  transition: all 0.5s ease;
+  width: 0;
+  height: 1px;
+  margin-top: 5px;
+  background: black;
+}
+
+a.active::after {
+  animation-name: anim;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+
+@keyframes anim {
+  from {
+    width: 0;
+  }
+  50% {
+    width: 120%;
+  }
+  to {
+    width: 80%;
+  }
+}
