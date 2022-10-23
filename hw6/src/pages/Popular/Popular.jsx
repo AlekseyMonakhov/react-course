@@ -19,10 +19,9 @@ const Popular = () => {
 
   const selectLang = useCallback(
     (selectedLang) => {
+      const notEqual = lang !== selectedLang;
       setSearchParams({ lang: selectedLang });
-      setRepos((prev) =>
-        lang === selectedLang ? prev : { loading: true, items: [] }
-      );
+      notEqual && setRepos({ loading: true, items: [] });
     },
     [setSearchParams, lang]
   );
