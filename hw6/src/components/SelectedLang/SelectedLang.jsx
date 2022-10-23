@@ -3,13 +3,13 @@ import "./selectedLang.css";
 
 const languages = ["All", "Javascript", "Ruby", "CSS", "Python", "Java"];
 
-const SelectedLang = memo(({ selectLang, selectedLang }) => {
-  console.log("lang render");
+const SelectedLang = memo(({ selectLang, selectedLang, loading }) => {
   return (
-    <ul className="lang-container">
+    <ul className='lang-container'>
       {languages.map((lang) => (
         <li
-          onClick={() => selectLang(lang)}
+          className={loading ? "disable" : undefined}
+          onClick={() => !loading && selectLang(lang)}
           style={selectedLang === lang ? { color: "orange" } : null}
           key={lang}
         >

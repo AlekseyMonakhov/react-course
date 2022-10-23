@@ -2,7 +2,6 @@ import React, { memo } from "react";
 import "./repo.css";
 
 const Repo = memo(({ repos }) => {
-  console.log("repo rendered");
   return (
     <ul className='popular-list'>
       {repos.map((repo, index) => (

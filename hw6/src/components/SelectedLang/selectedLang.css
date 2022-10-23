@@ -7,7 +7,10 @@
 .lang-container > li {
   list-style-type: none;
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: .8rem;
   font-weight: bold;
-  transition: all 0.3s ease;
+  transition: all .3s ease;
+}
+.lang-container > li.disable {
+  cursor: not-allowed;
 }
