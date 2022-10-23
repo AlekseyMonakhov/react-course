@@ -1,19 +1,19 @@
-header > nav {
+nav {
   display: flex;
   gap: 20px;
 }
-header > .active {
+nav > a.active {
   font-size: 1.2rem;
   font-weight: bold;
 }
-header > nav > a {
+nav > a {
   transition: all 0.5s ease;
   font-size: 1rem;
   font-weight: normal;
   color: black;
   text-decoration: none;
 }
-header > nav > a::after {
+nav > a::after {
   content: "";
   display: block;
   transition: all 0.5s ease;
@@ -23,7 +23,7 @@ header > nav > a::after {
   background: black;
 }
 
-header > nav > a.active::after {
+nav > a.active::after {
   animation-name: anim;
   animation-duration: 1s;
   animation-timing-function: ease;

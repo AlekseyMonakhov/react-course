@@ -1,6 +1,7 @@
 ul.popular-list {
   display: flex;
   flex-flow: row wrap;
+  justify-content: center;
 }
 li {
   list-style-type: none;
