@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { fetchPopularRepo } from "../../api";
+import Loader from "../../components/Loader/Loader";
 import Repo from "../../components/Repo/Repo";
 import SelectedLang from "../../components/SelectedLang/SelectedLang";
 import "./popular.css";
@@ -33,19 +34,7 @@ const Popular = () => {
         selectedLang={lang}
         loading={repos.loading}
       />
-      {repos.items.length ? (
-        <Repo repos={repos.items} />
-      ) : (
-        <h3 className='loader'>
-          <span>L</span>
-          <span>O</span>
-          <span>A</span>
-          <span>D</span>
-          <span>I</span>
-          <span>N</span>
-          <span>G</span>
-        </h3>
-      )}
+      {repos.items.length ? <Repo repos={repos.items} /> : <Loader />}
     </>
   );
 };
