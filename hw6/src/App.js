@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Battle from "./pages/Battle";
 import Header from "./components/Header/Header";
-import Popular from "./pages/Popular";
+import Popular from "./pages/Popular/Popular";
 
 function App() {
   return (
