@@ -28,14 +28,14 @@ const Popular = () => {
   );
 
   return (
-    <>
+    <main>
       <SelectedLang
         selectLang={selectLang}
         selectedLang={lang}
         loading={repos.loading}
       />
       {repos.items.length ? <Repo repos={repos.items} /> : <Loader />}
-    </>
+    </main>
   );
 };
 

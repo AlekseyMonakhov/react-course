@@ -171,3 +171,7 @@ body {
   padding: 15px;
   margin: 0 auto;
 }
+main {
+  display: flex;
+  flex-flow: column nowrap;
+}
