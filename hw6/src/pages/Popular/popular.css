@@ -1,3 +1,9 @@
+main {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+}
+
 h3.loader {
   text-align: center;
   text-transform: uppercase;

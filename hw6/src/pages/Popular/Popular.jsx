@@ -12,9 +12,9 @@ const Popular = () => {
   const lang = searchParams.get("lang");
 
   useEffect(() => {
-    fetchPopularRepo(lang).then((repositories) =>
-      setRepos({ loading: false, items: repositories })
-    );
+    fetchPopularRepo(lang)
+      .then((repositories) => setRepos({ loading: false, items: repositories }))
+      .catch((err) => console.log(err));
   }, [lang]);
 
   const selectLang = useCallback(
@@ -26,7 +26,6 @@ const Popular = () => {
     },
     [setSearchParams, lang]
   );
-
   return (
     <main>
       <SelectedLang
