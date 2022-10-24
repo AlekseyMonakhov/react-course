@@ -9,7 +9,7 @@ const SelectedLang = memo(({ selectLang, selectedLang, loading }) => {
       {languages.map((lang) => (
         <li
           className={loading ? "disable" : undefined}
-          onClick={() => !loading && selectLang(lang)}
+          onClick={() => (selectedLang !== lang && !loading) && selectLang(lang)}
           style={selectedLang === lang ? { color: "orange" } : null}
           key={lang}
         >

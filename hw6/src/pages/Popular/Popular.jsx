@@ -19,11 +19,10 @@ const Popular = () => {
 
   const selectLang = useCallback(
     (selectedLang) => {
-      const notEqual = lang !== selectedLang;
       setSearchParams({ lang: selectedLang });
-      notEqual && setRepos({ loading: true, items: [] });
+      setRepos({ loading: true, items: [] });
     },
-    [setSearchParams, lang]
+    [setSearchParams]
   );
   return (
     <main>
