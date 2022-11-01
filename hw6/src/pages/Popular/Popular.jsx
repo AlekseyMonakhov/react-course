@@ -24,6 +24,7 @@ const Popular = () => {
     },
     [setSearchParams]
   );
+  
   return (
     <main>
       <SelectedLang
