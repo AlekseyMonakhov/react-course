@@ -14,6 +14,7 @@ const Results = () => {
 
     useEffect(() => {
         const searchParams = new URLSearchParams(search);
+
         startBattle([
             searchParams.get("playerOneName"),
             searchParams.get("playerTwoName"),
@@ -24,7 +25,6 @@ const Results = () => {
             })
             .catch((error) => {
                 errorHandler(error);
-                setError(true);
                 setLoading(false);
             })
             .finally(() => setLoading(false));
