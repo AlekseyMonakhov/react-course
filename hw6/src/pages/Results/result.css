@@ -1,6 +1,7 @@
 .result-container {
     display: flex;
 }
+
 .error {
     flex-grow: 1;
     text-align: center;

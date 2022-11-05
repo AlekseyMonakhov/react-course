@@ -1,75 +1,93 @@
-import React, { useId, useState } from "react";
-import { useEffect } from "react";
-import { getRepos, getUser } from "../../api";
-import { useSearchParams } from "react-router-dom";
-import Loader from "../../components/Loader/Loader";
-import PlayerPrev from "../../components/PlayerPrev/PlayerPrev";
+import React, {useEffect, useState} from "react";
+import {useLocation} from "react-router-dom";
 import "./result.css";
+import {getRepos, getUser} from "../../api";
+import PlayerPrev from "../../components/PlayerPrev/PlayerPrev";
+import Loader from "../../components/Loader/Loader";
 
 const Results = () => {
-    const [searchParams] = useSearchParams();
-    const [userOne, setUserOne] = useState({ login: "", avatar: "", score: 0 });
-    const [userTwo, setUserTwo] = useState({ login: "", avatar: "", score: 0 });
-    const [error, setError] = useState(0);
+    const {search} = useLocation();
+    const [winner, setWinner] = useState({login: "", avatar: "", score: 0});
+    const [loser, setLoser] = useState({login: "", avatar: "", score: 0});
+    const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
-    const id = useId();
 
     useEffect(() => {
-        const currentParams = new Map(...[searchParams]);
+        const searchParams = new URLSearchParams(search);
+        startBattle([
+            searchParams.get("playerOneName"),
+            searchParams.get("playerTwoName"),
+        ])
+            .then(([winner, loser]) => {
+                setWinner(winner);
+                setLoser(loser);
+            })
+            .catch((error) => {
+                errorHandler(error);
+                setError(true);
+                setLoading(false);
+            })
+            .finally(() => setLoading(false));
+    }, [search]);
 
-        currentParams.forEach(async (param, key) => {
-            try {
-                const responceUser = await getUser(param);
-                const responceUserRepos = await getRepos(param);
+    const getStarCount = (repos) => {
+        return repos.reduce((prev, repo) => prev + repo.stargazers_count, 0);
+    };
 
-                (key === "playerOneName" ? setUserOne : setUserTwo)((prev) => ({
-                    ...prev,
-                    login: responceUser?.login,
-                    avatar: responceUser?.avatar_url,
-                    score:
-                        prev.score +
-                        responceUser?.followers +
-                        responceUserRepos?.reduce((prev, current) => {
-                            return prev + current.stargazers_count;
-                        }, 0),
-                }));
-            } catch (err) {
-                console.log(err);
-                if (err.response.status === 404) {
-                    setLoading(false);
-                    setError(err.response.status);
-                }
-                if (err.response.status === 403) {
-                    setLoading(false);
-                    setError(err.response.status);
-                }
-            }
-        });
-        setLoading(false);
-    }, [searchParams]);
-    console.log("render");
+    const calculateScore = (profile, repos) => {
+        const {followers} = profile;
+        const totalStars = getStarCount(repos);
+        return followers + totalStars;
+    };
+
+    const getUserData = (username) => {
+        return Promise.all([getUser(username), getRepos(username)])
+            .then(([profile, repos]) => {
+                return {
+                    login: profile.login,
+                    avatar: profile.avatar_url,
+                    score: calculateScore(profile, repos),
+                };
+            })
+            .catch((err) => {
+                errorHandler(err);
+            });
+    };
+
+    const sortPlayers = (players) => {
+        return players.sort((a, b) => b.score - a.score);
+    };
+
+    const startBattle = (players) => {
+        return Promise.all(players.map(getUserData))
+            .then(sortPlayers)
+            .catch(errorHandler);
+    };
+
+    const errorHandler = (error) => {
+        setError(true);
+        console.log(error);
+    };
+
     return (
-        <div className='result-container'>
+        <div className="result-container">
             {loading ? (
-                <Loader />
+                <Loader/>
             ) : error ? (
-                <h2 className='error'>
-                    {error === 403
-                        ? "I like github API"
-                        : "Sorry, invalid user"}
-                </h2>
+                <h3 className={"error"}>Some error</h3>
             ) : (
-                [userOne, userTwo]
-                    .sort((a, b) => b.score - a.score)
-                    .map((user, index) => (
-                        <PlayerPrev
-                            username={user.login}
-                            avatar={user.avatar}
-                            key={index + `${id}`}
-                        >
-                            <h2>{index ? "Second place" : "First place"}</h2>
-                        </PlayerPrev>
-                    ))
+                <>
+                    <PlayerPrev avatar={winner.avatar} username={winner.login}>
+                        <h3>
+                            {winner.login} score: {winner.score}
+                        </h3>
+                    </PlayerPrev>
+                    <PlayerPrev avatar={loser.avatar} username={loser.login}>
+                        <h3>
+                            {loser.login} score: {loser.score}
+                        </h3>
+                    </PlayerPrev>
+                </>
             )}
         </div>
     );
