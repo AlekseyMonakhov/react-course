@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useLocation} from "react-router-dom";
 import "./result.css";
-import { getRepos, getUser } from "../../api";
+import {getRepos, getUser} from "../../api";
 import PlayerPrev from "../../components/PlayerPrev/PlayerPrev";
 import Loader from "../../components/Loader/Loader";
 
 const Results = () => {
-    const { search } = useLocation();
-    const [winner, setWinner] = useState({ login: "", avatar: "", score: 0 });
-    const [loser, setLoser] = useState({ login: "", avatar: "", score: 0 });
+    const {search} = useLocation();
+    const [winner, setWinner] = useState({login: "", avatar: "", score: 0});
+    const [loser, setLoser] = useState({login: "", avatar: "", score: 0});
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
 
@@ -29,7 +29,7 @@ const Results = () => {
                 });
         };
         const calculateScore = (profile, repos) => {
-            const { followers } = profile;
+            const {followers} = profile;
             const totalStars = getStarCount(repos);
             return followers + totalStars;
         };
@@ -69,27 +69,21 @@ const Results = () => {
     };
 
     return (
-        <div className='result-container'>
+        <div className="result-container">
             {loading ? (
-                <Loader />
+                <Loader/>
             ) : error ? (
                 <h3 className={"error"}>Some error</h3>
             ) : (
                 <>
-                    <PlayerPrev
-                        avatar={winner.avatar}
-                        username={winner.login}
-                    >
+                    <PlayerPrev avatar={winner.avatar} username={winner.login}>
                         <h3>
-                            {winner.login} score: {winner.score}
+                            Winner: {winner.login}, score: {winner.score}
                         </h3>
                     </PlayerPrev>
-                    <PlayerPrev
-                        avatar={loser.avatar}
-                        username={loser.login}
-                    >
+                    <PlayerPrev avatar={loser.avatar} username={loser.login}>
                         <h3>
-                            {loser.login} score: {loser.score}
+                            Second Place: {loser.login}, score: {loser.score}
                         </h3>
                     </PlayerPrev>
                 </>
