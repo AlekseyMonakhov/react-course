@@ -35,6 +35,7 @@ export const battleReducer = (store = initialState, action) => {
             return {
                 ...store,
                 playerOne: {
+                    ...store.playerOne,
                     login: action.payload.userName,
                     avatar: action.payload.avatar,
                     score: action.payload.score,
@@ -83,6 +84,7 @@ export const battleReducer = (store = initialState, action) => {
             return {
                 ...store,
                 playerTwo: {
+                    ...store.playerTwo,
                     login: action.payload.userName,
                     avatar: action.payload.avatar,
                     score: action.payload.score,
