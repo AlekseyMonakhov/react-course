@@ -11,7 +11,6 @@ const SelectedLang = memo(() => {
     const selectedLang = useSelector((store) => store.popularReducer.selectedLang)
     const loading = useSelector((store) => store.popularReducer.isLoading)
 
-    console.log(selectedLang)
     useEffect(() => {
         dispatch(getRepos(selectedLang));
 
