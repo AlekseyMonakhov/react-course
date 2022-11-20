@@ -1,85 +1,85 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, {useCallback} from "react";
+import {Link, useLocation} from "react-router-dom";
 import PlayerPrev from "../../components/PlayerPrev/PlayerPrev";
 import PlayerInput from "./../../components/PlayerInput/PlayerInput";
 import "./Battle.css";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import {resetPlayerOne, resetPlayerTwo} from "../../redux/Battle/battle.actions";
+import {setUser} from "../../redux/Battle/battle.thunk";
+import Error from "../../components/Error/Error";
+import Loader from "../../components/Loader/Loader";
 
 const Battle = () => {
-    const [playerOneName, setPlayerOneName] = useState(``);
-    const [playerTwoName, setPlayerTwoName] = useState(``);
-    const [playerOneImage, setPlayerOneImage] = useState(``);
-    const [playerTwoImage, setPlayerTwoImage] = useState(``);
-
+    const dispatch = useDispatch()
     const location = useLocation();
+    const playerOne = useSelector((state) => state.battleReducer.playerOne, shallowEqual)
+    const playerTwo = useSelector((state) => state.battleReducer.playerTwo, shallowEqual)
 
     const handleSubmit = (userName, id) => {
-        if (id === "first") {
-            setPlayerOneName(userName);
-            setPlayerOneImage(`https://github.com/${userName}.png?size=200`);
-        } else {
-            setPlayerTwoName(userName);
-            setPlayerTwoImage(`https://github.com/${userName}.png?size=200`);
-        }
+        dispatch(setUser(userName, id))
     };
 
-    const handleReset = (id) => {
+    const handleReset = useCallback((id) => {
         if (id === "first") {
-            setPlayerOneName(``);
-            setPlayerOneImage(``);
+            dispatch(resetPlayerOne())
         } else {
-            setPlayerTwoName(``);
-            setPlayerTwoImage(``);
+            dispatch(resetPlayerTwo())
         }
-    };
+    }, [dispatch]);
 
     return (
         <main>
             <div className='battle-container'>
-                {!playerOneImage ? (
-                    <PlayerInput
-                        label={`Player 1`}
-                        id={"first"}
-                        onSubmit={handleSubmit}
-                    />
-                ) : (
-                    <PlayerPrev
-                        avatar={playerOneImage}
-                        username={playerOneName}
-                        handleReset={handleReset}
-                        id='first'
-                    >
-                        <button
-                            className='reset'
-                            onClick={() => handleReset(`first`)}
+                {playerOne.isLoading ?
+                    <Loader/>
+                    : playerOne.error ? (
+                        <Error handleReset={handleReset} id={"first"}/>
+                    ) : playerOne.avatar ? (
+                        <PlayerPrev
+                            avatar={playerOne.avatar}
+                            username={playerOne.login}
+                            handleReset={handleReset}
+                            id='first'
                         >
-                            Reset
-                        </button>
-                    </PlayerPrev>
-                )}
-                {!playerTwoImage ? (
-                    <PlayerInput
-                        label={`Player 2`}
-                        id={"second"}
-                        onSubmit={handleSubmit}
-                    />
-                ) : (
-                    <PlayerPrev
-                        avatar={playerTwoImage}
-                        username={playerTwoName}
-                    >
-                        <button
-                            className='reset'
-                            onClick={() => handleReset(`second`)}
+                            <button
+                                className='reset'
+                                onClick={() => handleReset(`first`)}
+                            >
+                                Reset
+                            </button>
+                        </PlayerPrev>
+                    ) : (
+                        <PlayerInput
+                            label={`Player 1`}
+                            id={"first"}
+                            onSubmit={handleSubmit}
+                        />
+                    )}
+                {playerTwo.error ?
+                    <Error handleReset={handleReset} id={"second"}/>
+                    : !playerTwo.avatar ? (
+                        <PlayerInput
+                            label={`Player 2`}
+                            id={"second"}
+                            onSubmit={handleSubmit}
+                        />
+                    ) : (
+                        <PlayerPrev
+                            avatar={playerTwo.avatar}
+                            username={playerTwo.login}
                         >
-                            Reset
-                        </button>
-                    </PlayerPrev>
-                )}
-                {playerOneImage && playerTwoImage && (
+                            <button
+                                className='reset'
+                                onClick={() => handleReset(`second`)}
+                            >
+                                Reset
+                            </button>
+                        </PlayerPrev>
+                    )}
+                {playerOne.avatar && playerTwo.avatar && (
                     <Link
                         to={{
                             pathname: `${location.pathname}/results`,
-                            search: `?playerOneName=${playerOneName}&playerTwoName=${playerTwoName}`,
                         }}
                         className='button'
                     >

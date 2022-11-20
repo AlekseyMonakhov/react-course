@@ -15,7 +15,7 @@ export const getUser = async (username) => {
         const user = await axios.get(`https://api.github.com/users/${username}`);
         return user.data;
     } catch (error) {
-        console.log(error);
+       throw error.response.status
     }
 };
 
@@ -24,7 +24,7 @@ export const getRepos = async (username) => {
         const repos = await axios.get(`https://api.github.com/users/${username}/repos`);
         return repos.data;
     } catch (error) {
-        console.log(error);
+        throw error
     }
 };
 

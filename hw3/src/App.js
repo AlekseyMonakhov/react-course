@@ -2,7 +2,7 @@ import "./App.css";
 import React from "react";
 import {Client} from "./components/Client";
 import Notification from "./components/Notification";
-import {Modal} from "./Modal";
+import Modal from "./Modal";
 
 class App extends React.Component {
     state = {
@@ -18,6 +18,7 @@ class App extends React.Component {
 
     toggleShowMessage = () => {
         this.setState({showMessage: false});
+        console.log("hekl");
     };
 
     updateHandler = async (id, value) => {

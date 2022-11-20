@@ -1,6 +1,11 @@
 import React, { PureComponent } from "react";
 
 export class Notification extends PureComponent {
+    state = {show: false}
+    toogleShow = () => {
+        this.props.toogleShowMessagge()
+        this.setState(this.setState((prev) => !prev), console.log("done"))
+    }
   render() {
     return (
       <div
@@ -26,7 +31,7 @@ export class Notification extends PureComponent {
             padding: "10px",
             fontSize: "24px",
           }}
-          onClick={() => this.props.toogleShowMessagge()}
+          onClick={() => this.toogleShow()}
         >
           Close
         </button>
