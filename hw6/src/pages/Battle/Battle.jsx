@@ -38,8 +38,6 @@ const Battle = () => {
                         <PlayerPrev
                             avatar={playerOne.avatar}
                             username={playerOne.login}
-                            handleReset={handleReset}
-                            id='first'
                         >
                             <button
                                 className='reset'
