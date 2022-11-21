@@ -3,7 +3,6 @@ import {useSelector} from "react-redux";
 
 const Error = memo(({handleReset, id}) => {
     const error = useSelector((state) => state.battleReducer[id === "first" ? "playerOne" : "playerTwo"].error)
-    console.log(error)
     return (
         <div className={"player-form"}>
             <h3>{error === 404 ? "User not found" : "Github API request count limit"}</h3>
