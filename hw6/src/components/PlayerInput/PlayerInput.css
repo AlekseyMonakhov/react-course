@@ -6,6 +6,9 @@
     gap: 15px;
 
 }
+.player-form > h3 {
+    text-align: center;
+}
 
 .player-form > label {
     font-size: 1.2rem;

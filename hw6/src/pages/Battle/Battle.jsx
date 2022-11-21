@@ -30,11 +30,11 @@ const Battle = () => {
     return (
         <main>
             <div className='battle-container'>
-                {playerOne.isLoading ?
+                {playerOne.error ? (
+                    <Error handleReset={handleReset} id={"first"}/>
+                ) : playerOne.isLoading ?
                     <Loader/>
-                    : playerOne.error ? (
-                        <Error handleReset={handleReset} id={"first"}/>
-                    ) : playerOne.avatar ? (
+                    : playerOne.avatar ? (
                         <PlayerPrev
                             avatar={playerOne.avatar}
                             username={playerOne.login}
@@ -57,25 +57,27 @@ const Battle = () => {
                     )}
                 {playerTwo.error ?
                     <Error handleReset={handleReset} id={"second"}/>
-                    : !playerTwo.avatar ? (
-                        <PlayerInput
-                            label={`Player 2`}
-                            id={"second"}
-                            onSubmit={handleSubmit}
-                        />
-                    ) : (
-                        <PlayerPrev
-                            avatar={playerTwo.avatar}
-                            username={playerTwo.login}
-                        >
-                            <button
-                                className='reset'
-                                onClick={() => handleReset(`second`)}
+                    : playerTwo.isLoading ?
+                        <Loader/>
+                        : playerTwo.avatar ? (
+                            <PlayerPrev
+                                avatar={playerTwo.avatar}
+                                username={playerTwo.login}
                             >
-                                Reset
-                            </button>
-                        </PlayerPrev>
-                    )}
+                                <button
+                                    className='reset'
+                                    onClick={() => handleReset(`second`)}
+                                >
+                                    Reset
+                                </button>
+                            </PlayerPrev>
+                        ) : (
+                            <PlayerInput
+                                label={`Player 2`}
+                                id={"second"}
+                                onSubmit={handleSubmit}
+                            />
+                        )}
                 {playerOne.avatar && playerTwo.avatar && (
                     <Link
                         to={{
