@@ -2,9 +2,8 @@
     display: flex;
     align-items: center;
     flex-flow: column nowrap;
+    gap: 20px;
     width: 40%;
-    gap: 15px;
-
 }
 .player-form > h3 {
     text-align: center;
