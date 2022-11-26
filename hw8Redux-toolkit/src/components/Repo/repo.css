@@ -1,0 +1,34 @@
+ul.popular-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+li {
+  list-style-type: none;
+}
+
+.avatar {
+  width: 150px;
+  border-radius: 50%;
+}
+.popular-item {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 20px;
+}
+.space-list-items {
+  display: flex;
+  align-items: center;
+  flex-flow: column nowrap;
+  gap: 10px;
+}
+.popular-rank {
+  align-self: center;
+}
+.space-list-items a {
+  color: red;
+  text-decoration: none;
+}
+.space-list-items :nth-child(3) {
+  font-weight: bold;
+}
