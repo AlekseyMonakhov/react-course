@@ -98,6 +98,27 @@ const battleSlice = createSlice({
                         break;
                 }
             })
+            .addCase(setUser.rejected, (state, action) => {
+                switch (action.meta.arg.id) {
+                    case "first":
+                        state.playerOne = {
+                            login: "",
+                            avatar: "",
+                            score: "",
+                            isLoading: false,
+                            error: action.error.message,
+                        }
+                        break;
+                    default:
+                        state.playerTwo = {
+                            login: "",
+                            avatar: "",
+                            score: "",
+                            isLoading: false,
+                            error: action.error.message,
+                        }
+                }
+            })
     }
 })
 
