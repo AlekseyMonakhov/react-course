@@ -4,27 +4,24 @@ import PlayerPrev from "../../components/PlayerPrev/PlayerPrev";
 import PlayerInput from "./../../components/PlayerInput/PlayerInput";
 import "./Battle.css";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import {resetPlayerOne, resetPlayerTwo} from "../../redux/Battle/battle.actions";
-import {setUser} from "../../redux/Battle/battle.thunk";
 import Error from "../../components/Error/Error";
 import Loader from "../../components/Loader/Loader";
+import {playerReset, setUser} from "../../redux/battleSlice";
 
 const Battle = () => {
     const dispatch = useDispatch()
     const location = useLocation();
-    const playerOne = useSelector((state) => state.battleReducer.playerOne, shallowEqual)
-    const playerTwo = useSelector((state) => state.battleReducer.playerTwo, shallowEqual)
+    const playerOne = useSelector((state) => state.battle.playerOne, shallowEqual)
+    const playerTwo = useSelector((state) => state.battle.playerTwo, shallowEqual)
 
     const handleSubmit = (userName, id) => {
-        dispatch(setUser(userName, id))
+        console.log(id)
+        dispatch(setUser({userName, id}))
     };
 
     const handleReset = useCallback((id) => {
-        if (id === "first") {
-            dispatch(resetPlayerOne())
-        } else {
-            dispatch(resetPlayerTwo())
-        }
+        console.log(id)
+        dispatch(playerReset(id))
     }, [dispatch]);
 
     return (

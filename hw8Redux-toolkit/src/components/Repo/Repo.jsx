@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import Loader from "../Loader/Loader";
 
 const Repo = memo(() => {
-    const repos = useSelector((store) => store.popularReducer.repos)
+    const repos = useSelector((store) => store.popular.repos)
     return (
         repos.length ?
             <ul className='popular-list'>

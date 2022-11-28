@@ -4,8 +4,8 @@ import PlayerPrev from "../../components/PlayerPrev/PlayerPrev";
 import {shallowEqual, useSelector} from "react-redux";
 
 const Results = () => {
-    const userOne = useSelector((state) => state.battleReducer.playerOne, shallowEqual)
-    const userTwo = useSelector((state) => state.battleReducer.playerTwo, shallowEqual)
+    const userOne = useSelector((state) => state.battle.playerOne, shallowEqual)
+    const userTwo = useSelector((state) => state.battle.playerTwo, shallowEqual)
     const [winner, setWinner] = useState({});
     const [loser, setLoser] = useState({});
     const [equalResult, setEqualResult] = useState(false);
