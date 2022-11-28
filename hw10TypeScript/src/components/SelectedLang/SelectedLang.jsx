@@ -1,18 +1,16 @@
 import React, {memo, useEffect} from "react";
 import "./selectedLang.css";
-import {setLanguage} from "../../redux/Popular/popular.actions";
 import {useDispatch, useSelector} from "react-redux";
-import {getRepos} from "../../redux/Popular/popular.thunk";
+import {getPopular, setLanguage} from "../../redux/popularSlice";
 
 const languages = ["All", "Javascript", "Ruby", "CSS", "Python", "Java"];
 
 const SelectedLang = memo(() => {
     const dispatch = useDispatch();
-    const selectedLang = useSelector((store) => store.popularReducer.selectedLang)
-    const loading = useSelector((store) => store.popularReducer.isLoading)
-
+    const selectedLang = useSelector((store) => store.popular.selectedLang)
+    const loading = useSelector((store) => store.popular.isLoading)
     useEffect(() => {
-        dispatch(getRepos(selectedLang));
+        dispatch(getPopular({selectedLang}));
 
         // eslint-disable-next-line
     }, [selectedLang]);
