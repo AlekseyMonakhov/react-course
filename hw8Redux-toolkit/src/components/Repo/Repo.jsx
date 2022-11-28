@@ -5,7 +5,6 @@ import Loader from "../Loader/Loader";
 
 const Repo = memo(() => {
     const repos = useSelector((store) => store.popular.repos)
-    console.log(repos)
     return (
         repos?.length ?
             <ul className='popular-list'>
