@@ -1,21 +1,25 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {fetchPopularRepo} from "../api";
+import {PopularState} from "../types";
 
+type getPopularProps = {
+    selectedLang: string;
+}
 
 export const getPopular = createAsyncThunk(
     "popular/getReposByLanguage",
-    async ({selectedLang}) => {
+    async ({selectedLang} :getPopularProps) => {
         const repos = await fetchPopularRepo(selectedLang);
         return repos;
     }
 )
 
 
-const initialState = {
+const initialState:PopularState = {
     selectedLang: "All",
     repos: [],
     isLoading: false,
-    error: null
+    error: "",
 }
 
 const popularSlice = createSlice({
@@ -34,11 +38,11 @@ const popularSlice = createSlice({
             .addCase(getPopular.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.repos = action.payload;
-                state.error = null;
+                state.error = "";
             })
             .addCase(getPopular.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.payload;
+                state.error = action.error.message!;
             })
     }
 })

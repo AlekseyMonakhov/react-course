@@ -1,10 +1,18 @@
 import React, {memo, useState} from "react";
 import "./PlayerInput.css";
 
-const PlayerInput = memo(({label, id, onSubmit}) => {
-    const [userName, setUserName] = useState(``);
 
-    const handleSubmit = (event) => {
+type props ={
+    label:string;
+    id:string;
+    onSubmit: (userName: string, id: string) => void
+}
+
+
+const PlayerInput = memo(({label, id, onSubmit}: props) => {
+    const [userName, setUserName] = useState<string>(``);
+
+    const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         onSubmit(userName, id)
     };

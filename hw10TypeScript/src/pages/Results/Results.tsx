@@ -2,12 +2,14 @@ import React, {useEffect, useState} from "react";
 import "./result.css";
 import PlayerPrev from "../../components/PlayerPrev/PlayerPrev";
 import {shallowEqual, useSelector} from "react-redux";
+import {RootState} from "../../redux/store";
+import {User} from "../../types";
 
 const Results = () => {
-    const userOne = useSelector((state) => state.battle.playerOne, shallowEqual)
-    const userTwo = useSelector((state) => state.battle.playerTwo, shallowEqual)
-    const [winner, setWinner] = useState({});
-    const [loser, setLoser] = useState({});
+    const userOne = useSelector((state:RootState) => state.battle.playerOne, shallowEqual)
+    const userTwo = useSelector((state:RootState) => state.battle.playerTwo, shallowEqual)
+    const [winner, setWinner] = useState<User>();
+    const [loser, setLoser] = useState<User>();
     const [equalResult, setEqualResult] = useState(false);
 
     useEffect(() => {
@@ -28,15 +30,15 @@ const Results = () => {
     return (
         <div className="result-container">
             <>
-                <PlayerPrev avatar={winner.avatar} username={winner.login}>
+                <PlayerPrev avatar={winner?.avatar} username={winner?.login}>
                     <h3>
-                        Winner: {winner.login}, score: {winner.score}
+                        Winner: {winner?.login}, score: {winner?.score}
                     </h3>
                 </PlayerPrev>
-                <PlayerPrev avatar={loser.avatar} username={loser.login}>
+                <PlayerPrev avatar={loser?.avatar} username={loser?.login}>
                     <h3>
-                        {equalResult ? "Winner" : "SecondPlace"}: {loser.login},
-                        score: {loser.score}
+                        {equalResult ? "Winner" : "SecondPlace"}: {loser?.login},
+                        score: {loser?.score}
                     </h3>
                 </PlayerPrev>
             </>

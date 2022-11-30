@@ -1,25 +1,25 @@
 import React, {useCallback} from "react";
 import {Link, useLocation} from "react-router-dom";
 import PlayerPrev from "../../components/PlayerPrev/PlayerPrev";
-import PlayerInput from "./../../components/PlayerInput/PlayerInput";
+import PlayerInput from "../../components/PlayerInput/PlayerInput";
 import "./Battle.css";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import Error from "../../components/Error/Error";
 import Loader from "../../components/Loader/Loader";
 import {playerReset, setUser} from "../../redux/battleSlice";
+import {AppDispatch, RootState} from "../../redux/store";
 
 const Battle = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const location = useLocation();
-    const playerOne = useSelector((state) => state.battle.playerOne, shallowEqual)
-    const playerTwo = useSelector((state) => state.battle.playerTwo, shallowEqual)
+    const playerOne = useSelector((state:RootState) => state.battle.playerOne, shallowEqual)
+    const playerTwo = useSelector((state:RootState) => state.battle.playerTwo, shallowEqual)
 
-    const handleSubmit = (userName, id) => {
+    const handleSubmit = (userName:string, id:string) => {
         dispatch(setUser({userName, id}))
     };
 
-    const handleReset = useCallback((id) => {
-        console.log(id)
+    const handleReset = useCallback((id:string) => {
         dispatch(playerReset(id))
     }, [dispatch]);
 

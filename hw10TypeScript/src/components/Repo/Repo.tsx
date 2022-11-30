@@ -2,13 +2,15 @@ import React, {memo} from "react";
 import "./repo.css";
 import {useSelector} from "react-redux";
 import Loader from "../Loader/Loader";
+import {Repository} from "../../types";
 
 const Repo = memo(() => {
+    // @ts-ignore
     const repos = useSelector((store) => store.popular.repos)
     return (
         repos?.length ?
             <ul className='popular-list'>
-                {repos.map((repo, index) => (
+                {repos.map((repo:Repository, index:number) => (
                     <li
                         key={repo.name}
                         className='popular-item'

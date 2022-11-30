@@ -1,13 +1,20 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {getRepos, getUser} from "../api";
+import {BattleState, setUserProps, User} from "../types";
 
+
+
+
+interface Repos {
+    stargazers_count: number;
+}
 
 export const setUser = createAsyncThunk(
     "battle/setUser",
-    async ({userName, id}, thunkAPI) => {
+    async ({userName, id}:setUserProps, thunkAPI) => {
         const user = await getUser(userName);
         const userRepos = await getRepos(userName);
-        const stargazers_count = userRepos.reduce((prev, cur) => prev + cur.stargazers_count, 0)
+        const stargazers_count = userRepos.reduce((prev:number, cur:Repos) => prev + cur.stargazers_count, 0)
 
         return {
             id,
@@ -19,18 +26,18 @@ export const setUser = createAsyncThunk(
 )
 
 
-const initialState = {
+const initialState: BattleState<User> = {
     playerOne: {
         login: "",
         avatar: "",
-        score: null,
+        score: 0,
         error: null,
         isLoading: false
     },
     playerTwo: {
         login: "",
         avatar: "",
-        score: null,
+        score: 0,
         error: null,
         isLoading: false
     },
@@ -46,7 +53,7 @@ const battleSlice = createSlice({
                     state.playerTwo = {
                         login: "",
                         avatar: "",
-                        score: null,
+                        score: 0,
                         error: null,
                         isLoading: false
                     }
@@ -55,7 +62,7 @@ const battleSlice = createSlice({
                     state.playerOne = {
                         login: "",
                         avatar: "",
-                        score: null,
+                        score: 0,
                         error: null,
                         isLoading: false
                     }
@@ -104,18 +111,18 @@ const battleSlice = createSlice({
                         state.playerOne = {
                             login: "",
                             avatar: "",
-                            score: "",
+                            score: 0,
                             isLoading: false,
-                            error: action.error.message,
+                            error: action.error.message!,
                         }
                         break;
                     default:
                         state.playerTwo = {
                             login: "",
                             avatar: "",
-                            score: "",
+                            score: 0,
                             isLoading: false,
-                            error: action.error.message,
+                            error: action.error.message!,
                         }
                 }
             })
