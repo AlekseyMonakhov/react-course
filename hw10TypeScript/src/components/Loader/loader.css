@@ -1,5 +1,6 @@
 h3.loader {
-    text-align: center;
+    display: flex;
+    justify-content: center;
     text-transform: uppercase;
     font-family: "Nunito", sans-serif;
     font-size: 4em;
@@ -48,4 +49,11 @@ h3.loader {
 }
 .loader span:nth-child(7) {
     animation-delay: 0.9s;
+}
+
+
+@media (max-width: 650px) {
+    h3.loader {
+        font-size: 50px;
+    }
 }

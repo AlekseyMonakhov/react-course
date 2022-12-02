@@ -3,7 +3,7 @@
     align-items: center;
     flex-flow: column nowrap;
     gap: 20px;
-    width: 40%;
+    width: 80%;
 }
 .player-form > h3 {
     text-align: center;

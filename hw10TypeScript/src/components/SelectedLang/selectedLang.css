@@ -1,11 +1,14 @@
 .lang-container {
   display: flex;
   width: 60%;
-  justify-content: space-around;
+  min-width: 365px;
+  justify-content: space-between;
   align-self: center;
+  overflow: auto hidden;
 }
 .lang-container > li {
   list-style-type: none;
+  padding: 10px;
   cursor: pointer;
   font-size: .8rem;
   font-weight: bold;
@@ -13,4 +16,10 @@
 }
 .lang-container > li.disable {
   cursor: not-allowed;
+}
+
+@media (max-width: 650px) {
+  .lang-container {
+    justify-content: flex-start;
+  }
 }

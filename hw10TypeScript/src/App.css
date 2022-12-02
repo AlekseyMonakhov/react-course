@@ -176,3 +176,25 @@ main {
   flex-flow: column nowrap;
   gap: 10px;
 }
+.home-container {
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 120%;
+  gap: 20px 0;
+  justify-content: center;
+}
+.home-container :first-child {
+  flex-basis: 100%;
+  text-align: center;
+}
+.home-container > h1:first-line {
+  color:orange;
+}
+
+.button {
+  color: white;
+  align-self: flex-end;
+  background-color: black;
+  padding: 10px 50px;
+  text-decoration: none;
+}

@@ -28,10 +28,9 @@
     border: none;
     cursor: pointer;
 }
-.battle-container > .button {
-    color: white;
-    align-self: flex-end;
-    background-color: black;
-    padding: 10px 50px;
-    text-decoration: none;
+
+@media (max-width: 650px) {
+    .battle-container {
+        row-gap: 10px;
+    }
 }
