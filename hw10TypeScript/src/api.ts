@@ -10,19 +10,17 @@ export const fetchPopularRepo = async (
                 language +
                 "&sort=stars&order=desc&type=Repositories"
         );
-        console.log(resp.data.items);
         return resp.data.items;
-    } catch (err) {
-        throw err;
+    } catch (error) {
+        throw error;
     }
 };
 
-export const getUser = async (username: string): Promise<UserData | never> => {
+export const getUser = async (username: string): Promise<UserData> => {
     try {
         const user = await axios.get(
             `https://api.github.com/users/${username}`
         );
-        
         
         return user.data;
     } catch (error) {
@@ -30,7 +28,7 @@ export const getUser = async (username: string): Promise<UserData | never> => {
     }
 };
 
-export const getRepos = async (username: string): Promise<Array<Repository> | never> => {
+export const getRepos = async (username: string): Promise<Array<Repository>> => {
     try {
         const repos = await axios.get(
             `https://api.github.com/users/${username}/repos`
