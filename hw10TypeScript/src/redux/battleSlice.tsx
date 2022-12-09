@@ -113,7 +113,7 @@ const battleSlice = createSlice({
                             avatar: "",
                             score: 0,
                             isLoading: false,
-                            error: action.error.message!,
+                            error: action.error.message || "Some error",
                         }
                         break;
                     default:
@@ -122,7 +122,7 @@ const battleSlice = createSlice({
                             avatar: "",
                             score: 0,
                             isLoading: false,
-                            error: action.error.message!,
+                            error: action.error.message || "Some error",
                         }
                 }
             })

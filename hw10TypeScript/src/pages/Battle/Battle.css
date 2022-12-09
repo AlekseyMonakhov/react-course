@@ -32,5 +32,10 @@
 @media (max-width: 650px) {
     .battle-container {
         row-gap: 10px;
+        flex-flow: column nowrap;
+        align-items: center;
+    }
+    .button {
+        align-self: center;
     }
 }

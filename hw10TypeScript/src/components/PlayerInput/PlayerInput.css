@@ -4,6 +4,8 @@
     flex-flow: column nowrap;
     gap: 20px;
     width: 80%;
+    max-width: 500px;
+    padding: 5px;
 }
 .player-form > h3 {
     text-align: center;

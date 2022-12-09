@@ -42,7 +42,7 @@ const popularSlice = createSlice({
             })
             .addCase(getPopular.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message!;
+                state.error = action.error.message || "Some error";
             })
     }
 })

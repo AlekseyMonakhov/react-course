@@ -16,6 +16,13 @@ export interface User {
     isLoading: boolean
 }
 
+export interface UserData {
+    avatar_url: string,
+    followers: number,
+    following: number,
+    public_repos: string,
+}
+
 export interface BattleState<UserType> {
     playerOne: UserType,
     playerTwo: UserType,
