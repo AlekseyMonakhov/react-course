@@ -12,7 +12,7 @@ const Error = memo(({handleReset, id} : props) => {
     const error = useSelector((state:RootState) => state.battle[id === "first" ? "playerOne" : "playerTwo"].error)
     return (
         <div className={"player-form"}>
-            <h3>{error === "404" ? "User not found" : "Github API request count limit"}</h3>
+            <h3>{error}</h3>
             <button onClick={() => handleReset(id)}>Try again</button>
         </div>
     );

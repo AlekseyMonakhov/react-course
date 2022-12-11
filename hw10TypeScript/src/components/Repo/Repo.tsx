@@ -3,10 +3,10 @@ import "./repo.css";
 import {useSelector} from "react-redux";
 import Loader from "../Loader/Loader";
 import {Repository} from "../../types";
+import {RootState} from "../../redux/store";
 
 const Repo = memo(() => {
-    // @ts-ignore
-    const repos = useSelector((store) => store.popular.repos)
+    const repos = useSelector((store: RootState) => store.popular.repos)
     return (
         repos?.length ?
             <ul className='popular-list'>
