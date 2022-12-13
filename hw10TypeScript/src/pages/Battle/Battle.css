@@ -14,10 +14,12 @@
     row-gap: 20px;
 }
 .userCart > h3 {
+    font-size: 1.2rem;
     max-width: 200px;
     line-height: 40px;
     text-align: center;
 }
+
 .userCart > h3:first-letter {
     font-size: 1.5rem;
     color: #e34d00;

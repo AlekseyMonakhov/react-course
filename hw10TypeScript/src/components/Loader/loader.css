@@ -11,7 +11,7 @@ h3.loader {
 .battle-container > .loader-container {
     max-width: 40%;
     font-size: 15px;
-    margin: auto 0;
+    margin: 50px auto;
 }
 
 .loader span {

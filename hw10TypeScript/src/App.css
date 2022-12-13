@@ -190,6 +190,15 @@ main {
 .home-container > h1:first-line {
   color:orange;
 }
+.userName {
+  font-size: 1.2rem;
+  font-weight: bolder;
+}
+.userName:first-letter {
+  font-size: 1.5rem;
+  color: #e34d00;
+  text-transform: uppercase;
+}
 
 .button {
   color: white;

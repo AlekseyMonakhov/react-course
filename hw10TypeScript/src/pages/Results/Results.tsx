@@ -32,13 +32,12 @@ const Results = () => {
             <>
                 <PlayerPrev avatar={winner?.avatar} username={winner?.login}>
                     <h3>
-                        Winner: {winner?.login}, score: {winner?.score}
+                        Winner<br/> score: {winner?.score}
                     </h3>
                 </PlayerPrev>
                 <PlayerPrev avatar={loser?.avatar} username={loser?.login}>
                     <h3>
-                        {equalResult ? "Winner" : "SecondPlace"}: {loser?.login},
-                        score: {loser?.score}
+                        {equalResult ? "Winner" : "SecondPlace"}<br/> score: {loser?.score}
                     </h3>
                 </PlayerPrev>
             </>

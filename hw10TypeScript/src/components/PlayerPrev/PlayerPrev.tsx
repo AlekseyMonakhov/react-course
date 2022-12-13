@@ -11,7 +11,7 @@ const PlayerPrev = ({avatar, username, children} :props) => {
     return (
         <div className="userCart">
             {avatar && <img src={avatar} alt="userPhoto" width="200" height="200"/>}
-            <h2>{username ? username : "Empty name"}</h2>
+            <h2 className={"userName"}>{username ? username : "Empty name"}</h2>
             {children}
         </div>
     );
