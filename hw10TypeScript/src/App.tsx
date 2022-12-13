@@ -1,5 +1,5 @@
 import "./App.css";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {HashRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
 import Battle from "./pages/Battle/Battle";
 import Header from "./components/Header/Header";
@@ -9,7 +9,7 @@ import React from "react";
 
 function App() {
     return (
-        <Router>
+        <Router basename={"/"}>
             <div className='container'>
                 <Header/>
                 <Routes>
