@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/AlekseyMonakhov/react-course/tree/main/hw10TypeScript/static/css/main.9aa45ff8.css",
+    "main.js": "/AlekseyMonakhov/react-course/tree/main/hw10TypeScript/static/js/main.8046d13e.js",
+    "index.html": "/AlekseyMonakhov/react-course/tree/main/hw10TypeScript/index.html",
+    "main.9aa45ff8.css.map": "/AlekseyMonakhov/react-course/tree/main/hw10TypeScript/static/css/main.9aa45ff8.css.map",
+    "main.8046d13e.js.map": "/AlekseyMonakhov/react-course/tree/main/hw10TypeScript/static/js/main.8046d13e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9aa45ff8.css",
+    "static/js/main.8046d13e.js"
+  ]
+}
