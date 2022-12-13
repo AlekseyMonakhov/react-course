@@ -1,2 +1,2 @@
 # react-course
-Hi, this is my React course at Hillel it School repo
+Hi, this my React course at Hillel It Schools a repo.
