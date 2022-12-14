@@ -13,6 +13,7 @@
   font-size: .8rem;
   font-weight: bold;
   transition: all .3s ease;
+  user-select: none;
 }
 .lang-container > li.disable {
   cursor: not-allowed;
