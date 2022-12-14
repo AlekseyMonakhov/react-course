@@ -28,7 +28,7 @@ const Repo = memo(() => {
                                 <a href={repo.html_url}>{repo.name}</a>
                             </li>
                             <li>@{repo.owner.login}</li>
-                            <li>{repo.stargazers_count} start</li>
+                            <li>{repo.stargazers_count} stars</li>
                         </ul>
                     </li>
                 ))}
