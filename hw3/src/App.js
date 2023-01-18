@@ -9,7 +9,6 @@ class App extends React.Component {
         clients: [],
         showMessage: false,
     };
-
     componentDidMount() {
         fetch("https://jsonplaceholder.typicode.com/posts")
             .then((response) => response.json())

@@ -7,7 +7,7 @@ type props = {
 }
 
 
-const PlayerPrev = ({avatar, username, children} :props) => {
+const PlayerPrev:React.FC<props> = ({avatar, username, children}) => {
     return (
         <div className="userCart">
             {avatar && <img src={avatar} alt="userPhoto" width="200" height="200"/>}

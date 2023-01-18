@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import {HashRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
@@ -5,7 +6,6 @@ import Battle from "./pages/Battle/Battle";
 import Header from "./components/Header/Header";
 import Popular from "./pages/Popular/Popular";
 import Results from "./pages/Results/Results";
-import React from "react";
 
 function App() {
     return (

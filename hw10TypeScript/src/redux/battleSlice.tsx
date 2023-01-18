@@ -1,9 +1,6 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {getRepos, getUser} from "../api";
-import {BattleState, setUserProps, User} from "../types";
-
-
-
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getRepos, getUser } from "../api";
+import { BattleState, setUserProps, User } from "../types";
 
 interface Repos {
     stargazers_count: number;
@@ -11,20 +8,22 @@ interface Repos {
 
 export const setUser = createAsyncThunk(
     "battle/setUser",
-    async ({userName, id}:setUserProps, thunkAPI) => {
+    async ({ userName, id }: setUserProps, thunkAPI) => {
         const user = await getUser(userName);
         const userRepos = await getRepos(userName);
-        const stargazers_count = userRepos.reduce((prev:number, cur:Repos) => prev + cur.stargazers_count, 0)
+        const stargazers_count = userRepos.reduce(
+            (prev: number, cur: Repos) => prev + cur.stargazers_count,
+            0
+        );
 
         return {
             id,
             userName,
             avatar: user.avatar_url,
-            score: user.followers + stargazers_count
-        }
+            score: user.followers + stargazers_count,
+        };
     }
-)
-
+);
 
 const initialState: BattleState<User> = {
     playerOne: {
@@ -32,16 +31,16 @@ const initialState: BattleState<User> = {
         avatar: "",
         score: 0,
         error: null,
-        isLoading: false
+        isLoading: false,
     },
     playerTwo: {
         login: "",
         avatar: "",
         score: 0,
         error: null,
-        isLoading: false
+        isLoading: false,
     },
-}
+};
 
 const battleSlice = createSlice({
     name: "battle",
@@ -49,14 +48,14 @@ const battleSlice = createSlice({
     reducers: {
         playerReset: (state, action) => {
             switch (action.payload) {
-                case "second" :
+                case "second":
                     state.playerTwo = {
                         login: "",
                         avatar: "",
                         score: 0,
                         error: null,
-                        isLoading: false
-                    }
+                        isLoading: false,
+                    };
                     break;
                 default:
                     state.playerOne = {
@@ -64,25 +63,24 @@ const battleSlice = createSlice({
                         avatar: "",
                         score: 0,
                         error: null,
-                        isLoading: false
-                    }
+                        isLoading: false,
+                    };
                     break;
-
             }
-        }
+        },
     },
     extraReducers: (builder) => {
-        builder.addCase(setUser.pending, (state, action) => {
-            switch (action.meta.arg.id) {
-                case "second":
-                    state.playerTwo.isLoading = true;
-                    break;
-                default:
-                    state.playerOne.isLoading = true;
-                    break;
-            }
-
-        })
+        builder
+            .addCase(setUser.pending, (state, action) => {
+                switch (action.meta.arg.id) {
+                    case "second":
+                        state.playerTwo.isLoading = true;
+                        break;
+                    default:
+                        state.playerOne.isLoading = true;
+                        break;
+                }
+            })
             .addCase(setUser.fulfilled, (state, action) => {
                 switch (action.payload.id) {
                     case "second":
@@ -91,8 +89,8 @@ const battleSlice = createSlice({
                             avatar: action.payload.avatar,
                             score: action.payload.score,
                             isLoading: false,
-                            error: null
-                        }
+                            error: null,
+                        };
                         break;
                     default:
                         state.playerOne = {
@@ -100,8 +98,8 @@ const battleSlice = createSlice({
                             avatar: action.payload.avatar,
                             score: action.payload.score,
                             isLoading: false,
-                            error: null
-                        }
+                            error: null,
+                        };
                         break;
                 }
             })
@@ -114,7 +112,7 @@ const battleSlice = createSlice({
                             score: 0,
                             isLoading: false,
                             error: action.error.message || "Some error",
-                        }
+                        };
                         break;
                     default:
                         state.playerTwo = {
@@ -123,11 +121,12 @@ const battleSlice = createSlice({
                             score: 0,
                             isLoading: false,
                             error: action.error.message || "Some error",
-                        }
+                        };
+                        break;
                 }
-            })
-    }
-})
+            });
+    },
+});
 
-export const {playerReset} = battleSlice.actions;
+export const { playerReset } = battleSlice.actions;
 export default battleSlice.reducer;

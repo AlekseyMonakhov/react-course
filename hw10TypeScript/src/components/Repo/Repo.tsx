@@ -1,12 +1,12 @@
 import React, {memo} from "react";
 import "./repo.css";
-import {useSelector} from "react-redux";
+import {shallowEqual, useSelector} from "react-redux";
 import Loader from "../Loader/Loader";
 import {Repository} from "../../types";
 import {RootState} from "../../redux/store";
 
 const Repo = memo(() => {
-    const repos = useSelector((store: RootState) => store.popular.repos)
+    const repos = useSelector((store: RootState) => store.popular.repos, shallowEqual)
     return (
         repos?.length ?
             <ul className='popular-list'>
